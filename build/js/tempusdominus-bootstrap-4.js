@@ -384,11 +384,6 @@ var DateTimePicker = function ($, moment) {
 
             this._initFormatting();
 
-            if (this.input !== undefined && this.input.is('input') && this.input.val().trim().length !== 0) {
-                this._setValue(this._parseInputDate(this.input.val().trim()), 0);
-            } else if (this._options.defaultDate && this.input !== undefined && this.input.attr('placeholder') === undefined) {
-                this._setValue(this._options.defaultDate, 0);
-            }
             if (this._options.inline) {
                 this.show();
             }
@@ -2687,6 +2682,11 @@ var TempusDominusBootstrap4 = function ($) {
             if (!data) {
                 data = new TempusDominusBootstrap4($(me), option);
                 $(me).data(DateTimePicker.DATA_KEY, data);
+                if (data.input !== undefined && data.input.is('input') && data.input.val().trim().length !== 0) {
+                    data._setValue(data._parseInputDate(data.input.val().trim()), 0);
+                } else if (data._options.defaultDate && data.input !== undefined && data.input.attr('placeholder') === undefined) {
+                    data._setValue(data._options.defaultDate, 0);
+                }
             }
 
             if (typeof option === 'string') {
